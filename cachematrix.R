@@ -13,7 +13,7 @@ set<- function(y){ x<<- y
                    
 inverse<<- NULL}
 
-  get<- function() x
+get<- function() x
 setinverse<- function(solve) inverse<<- solve
 getinverse<- function() inverse
 final<- list(set = set, get = get, setinverse= setinverse, getinverse = getinverse)
@@ -22,18 +22,25 @@ final
 
 ## This function will produce the result of input x matrix depending on the input is already been computed or unique.
 
+## Return a matrix that is the inverse of 'x'
+
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-  result<- makeCacheMatrix(x)
-  z<- result$getinverse()
- if(!is.null(z)) {  message("getting cached data")
- return(z)
- }
- else
-   z<- result$get()
- inverse<- solve(z, ...)
- result$setinverse(inverse)
- inverse
+
+result<- makeCacheMatrix(x)
+z<- result$getinverse()
+
+if(!is.null(z)) 
+
+{  message("getting cached data")
+return(z)
+}
+
+else
+
+z<- result$get()
+inverse<- solve(z, ...)
+result$setinverse(inverse)
+inverse
 }
 
 
